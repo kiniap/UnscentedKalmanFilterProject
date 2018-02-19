@@ -1,0 +1,2 @@
+/usr/bin/ar qc libUKF.a  CMakeFiles/UKF.dir/src/ukf.cpp.o
+/usr/bin/ranlib libUKF.a
