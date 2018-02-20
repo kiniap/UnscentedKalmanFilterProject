@@ -39,6 +39,15 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
+  // lidar measurement matrix
+  MatrixXd H_laser_;
+
+  // lidar measurement noise covariance matrix
+  MatrixXd R_laser_;
+
+  //radar measurement noise covariance matrix
+  MatrixXd R_radar_;
+
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
 
@@ -100,6 +109,12 @@ public:
   void UpdateLidar(MeasurementPackage meas_package);
 
   /**
+   * Updates the state and the state covariance matrix using a laser measurement
+   * @param meas_package The measurement at k+1
+   */
+  void UpdateLidarUKF(MeasurementPackage meas_package);
+
+  /**
    * Updates the state and the state covariance matrix using a radar measurement
    * @param meas_package The measurement at k+1
    */
@@ -149,6 +164,12 @@ public:
    * NIS for filter consistency
    */
   double NIS(const VectorXd& z, const VectorXd& z_pred, const MatrixXd& S_pred);
+
+  /**
+	Normalize the angle phi in the UKF
+   */
+  void NormalizeAngle(double& phi);
+
 };
 
 #endif /* UKF_H */
